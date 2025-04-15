@@ -1,6 +1,6 @@
 package data.placeOfBirthFrance
 default allow := false
 allow if {
-          input.parameter.placeOfBirth == input.credentialData.credentialSubject.placeOfBirth
-          input.parameter.gender == input.credentialData.credentialSubject.gender
+          input.credentialData.credentialSubject.placeOfBirth == input.parameter.placeOfBirth
+          input.credentialData.credentialSubject.gender == input.parameter.gender
          }
