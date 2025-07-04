@@ -16,7 +16,7 @@ async function countrows(file) {
 async function processfolder(folder) {
   const files = fs.readdirSync(folder)
 
-  for (const i = 0; i < files.length; i++) {
+  for (i = 0; i < files.length; i++) {
     const file = files[i]
     const fullpath = folder + '/' + file
     if (fs.statSync(fullpath).isDirectory()) {
