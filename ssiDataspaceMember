@@ -1,5 +1,13 @@
 package data.dataspaceMember
 default allow := false
 allow if {
-          input.credentialData.credentialSubject.dataspaceId == input.parameter.dataspaceId
+          input.credentialData.credentialSubject.dataspaceId == "DE"
+         }
+
+allow if {
+          input.credentialData.credentialSubject.dataspaceId == "FR"
+         }
+
+allow if {
+          input.credentialData.credentialSubject.dataspaceId == "RO"
          }
