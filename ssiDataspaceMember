@@ -1,0 +1,5 @@
+package data.dataspaceMember
+default allow := false
+allow if {
+          input.credentialData.credentialSubject.dataspaceId == input.parameter.dataspaceId
+         }
