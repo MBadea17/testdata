@@ -1,4 +1,4 @@
-package data.dataspaceMember
+package data.LrnCountryDeFrRo
 default allow := false
 allow if {
           input.credentialData.credentialSubject.dataspaceId == "DE"
