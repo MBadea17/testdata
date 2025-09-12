@@ -1,13 +1,13 @@
 package data.LrnCountryDeFrRo
 default allow := false
 allow if {
-          input.credentialData.credentialSubject.dataspaceId == "DE"
+          input.credentialData.credentialSubject["gx:leiCode-countryCode"] == "DE"
          }
 
 allow if {
-          input.credentialData.credentialSubject.dataspaceId == "FR"
+          input.credentialData.credentialSubject["gx:leiCode-countryCode"] == "FR"
          }
 
 allow if {
-          input.credentialData.credentialSubject.dataspaceId == "RO"
+          input.credentialData.credentialSubject["gx:leiCode-countryCode"] == "RO"
          }
