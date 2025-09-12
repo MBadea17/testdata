@@ -1,7 +1,7 @@
 package data.LrnCountryDeFrRo
 default allow := false
 allow if {
-          input.credentialData.credentialSubject["gx:leiCode-countryCode"] == "DE"
+          input.credentialData.credentialSubject["gx:leiCode-countryCode"] == "US"
          }
 
 allow if {
