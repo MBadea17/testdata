@@ -1,0 +1,68 @@
+const fs = require('fs')
+const path = require('path')
+
+const inputFolder = '/data/inputs'
+const outputFolder = '/data/outputs'
+
+const outputFile = path.join(outputFolder, 'output.log')
+const algoParamFile = path.join(inputFolder, 'algoCustomData.json')
+
+if (!fs.existsSync(outputFolder)) {
+  fs.mkdirSync(outputFolder, { recursive: true })
+}
+
+function readAlgoParams() {
+  if (!fs.existsSync(algoParamFile)) {
+    console.warn('Algo parameters file not found:', algoParamFile)
+    return {}
+  }
+  const content = fs.readFileSync(algoParamFile, 'utf8')
+  try {
+    return JSON.parse(content)
+  } catch (err) {
+    console.error('Error parsing algoCustomData.json', err)
+    return {}
+  }
+}
+
+function readDatasetFile(filePath) {
+  const content = fs.readFileSync(filePath, 'utf8')
+  return content
+}
+
+function appendToOutput(text) {
+  fs.appendFileSync(outputFile, text + '\n')
+}
+
+function processInputFolder(folder) {
+  const files = fs.readdirSync(folder)
+
+  files.forEach((file) => {
+    const fullPath = path.join(folder, file)
+    const stat = fs.statSync(fullPath)
+
+    if (stat.isDirectory()) {
+      processInputFolder(fullPath)
+    } else if (file !== 'algoCustomData.json') {
+      const datasetContent = readDatasetFile(fullPath)
+      appendToOutput(`--- Dataset File: ${file} ---`)
+      appendToOutput(datasetContent)
+    }
+  })
+}
+
+function main() {
+  const algoParams = readAlgoParams()
+  appendToOutput('--- Algorithm Parameters ---')
+  Object.entries(algoParams).forEach(([key, value]) => {
+    appendToOutput(`${key}: ${value}`)
+  })
+
+  appendToOutput('\n--- Dataset Contents ---')
+  processInputFolder(inputFolder)
+
+  console.log('Processing finished. Check output file at:', outputFile)
+}
+
+main()
+ 
